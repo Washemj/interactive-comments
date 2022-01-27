@@ -1,0 +1,312 @@
+/* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
+:root {
+    /* colors */
+    --clr-darkb: 212, 24%, 26%;
+    --clr-vlightg: 228 33% 97%;
+    --clr-lightg: 223 19% 97%;
+    --clr-lightgb: 239 57% 85%;
+    --clr-greyb:211, 10%, 45%;
+    --clr-white: 0 0% 100%;
+    --clr-modblue: 238, 40%, 52%;
+    --clr-softred: 358, 79%, 66%;
+    --clr-palered: 357, 100%, 86%;
+
+    /* font-sizes */
+    /* --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem); */
+    --fs-700: 1.5rem;
+    /* --fs-600: 1rem; */
+    --fs-500: 1.1rem;
+    --fs-400: 1rem;
+    /* --fs-300: 1rem;
+    --fs-200: 0.875rem; */
+
+    /* font-families */
+    /* --ff-serif: "Bellefair", serif; */
+    --ff-sans: 'Rubik', sans-serif;
+    /* --ff-sans-normal: "Barlow", sans-serif; */
+}
+
+@media (min-width: 35em) {
+    :root {
+        /* --fs-800: 5rem;
+        --fs-700: 2.5rem;
+        --fs-600: 1.5rem;
+        --fs-500: 1.25rem;
+        --fs-400: 1rem; */
+    }
+}
+
+@media (min-width: 45em) {
+    :root {
+        /* font-sizes */
+        /* --fs-800: 6.25rem;
+        --fs-700: 3.5rem;
+        --fs-600: 2rem;
+        --fs-500: 1.75rem;
+        --fs-400: 1.125rem;*/
+    }
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reset margins */
+body, h1, h2, h3, h4, h5, p, figure, picture {
+    margin: 0;
+}
+
+/* h1, h2, h3, h4, h5, h6, p {
+    font-weight: 400;
+} */
+
+/* set up the body */
+body {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-400);
+    color: hsl( var(--clr-greyb) );
+    background-color: hsl( var(--clr-vlightg) );
+    line-height: 1.5;
+    min-height: 100vh;
+    /* display: grid;
+    grid-template-rows: min-content 1fr; */
+    overflow-x: hidden;
+}
+
+/* make images easier to work with */
+img, picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* make form elements easier to work with */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+.padding-block {padding-block:1.5rem;}
+
+h3 {
+  font-size: var(--fs-500);
+  font-weight: 500;
+}
+.purple {
+  color:hsl(var(--clr-modblue));
+  font-weight: 500;
+}
+.red {
+  color:hsl(var(--clr-softred));
+  font-weight: 500;
+}
+.purple:hover, .red:hover{
+  opacity: 0.5;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:0.5rem;
+}
+.flex2 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap:0.5rem;
+}
+
+.grid-container {
+  display: grid;
+  margin:1rem;
+  padding:1rem;
+  border-radius: 5%;
+  /* place-items:center; */
+  background-color: hsl( var(--clr-white) );
+  grid-gap: 1rem;
+}
+
+
+.grid-container--posted {
+  align-items: center;
+  justify-content: left;
+  grid-template-areas:
+    "user name time time ."
+    "comment comment comment comment comment"
+    "vote vote . . reply"
+}
+
+.grid-container--you {
+  align-items: center;
+  grid-template-areas:
+    "user name you time time"
+    "comment comment comment comment comment"
+    "vote vote vote delete reply"
+}
+
+.grid-container--new {
+  grid-template-areas:
+    "textbox textbox"
+    "user btn "
+}
+
+.grid-container--posted > a, .grid-container--you > a{
+  grid-area: reply;
+  justify-self:right;
+  text-decoration: none;
+  grid-column-end:-1;
+}
+
+.delete {
+  grid-area: delete;
+  justify-self:right;
+  text-decoration: none;
+  align-items: center;
+  border:none;
+  background-color: inherit;
+  padding: 0;
+}
+.grid-container--posted a > img, .grid-container--you a > img , .grid-container--you button > img {
+  display: inline-block;
+  padding-right: 0.2rem;
+}
+.grid-container--posted > h3, .grid-container--you > h3 {
+  grid-area: name;
+}
+.time {
+  grid-area:time;
+}
+.vote {
+  grid-area:vote;
+  background-color: hsl( var(--clr-vlightg) );
+  padding:0.5rem 1rem;
+  border-radius: 10%;
+  width:min(60%, 7rem);
+}
+.vote > img {
+  opacity: 0.5;
+}
+.vote > img:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+.user {
+  grid-area:user;
+  justify-self:left;
+}
+.you {
+  grid-area: you;
+  background-color: hsl(var(--clr-modblue));
+  color: white;
+  padding-inline:0.5rem;
+  width:3rem;
+  text-align: center;
+}
+.comment {
+  grid-area:comment;
+}
+.input-group{
+  grid-area: textbox;
+}
+
+.btn {
+  align-self: center;
+  text-transform: uppercase;
+}
+.modal-footer > .btn {
+  width: 12rem;
+}
+.btn-danger {
+  background-color: hsl(var(--clr-softred))
+}
+.btn1 {
+  width:100px;
+  height: 3rem;
+  color: hsl( var(--clr-white) );
+  background-color: hsl( var(--clr-modblue) );
+  grid-area: btn;
+  justify-self:right;
+}
+.btn1:hover,.btn1:focus {
+  opacity: 0.5;
+  color: hsl( var(--clr-white) );
+  transition: opacity 300ms linear;
+}
+.reply {
+  margin-left: 1rem;
+  border-left: 2px solid hsl(var(--clr-lightgb)/0.3);
+}
+/* .votes {
+  width: 10px;
+} */
+
+@media (min-width: 35em) {
+
+    .grid-container {
+      margin-inline: auto;
+      width: 60%;
+    }
+    .grid-container--posted {
+      grid-template-areas:
+        "vote user name time . reply"
+        "vote comment comment comment comment comment";
+    }
+    .grid-container--you {
+      grid-template-areas:
+        "vote user name you time . delete reply"
+        "vote comment comment comment comment comment comment comment";
+
+    }
+    .grid-container--new {
+      grid-template-areas:
+          "user textbox btn";
+      grid-template-columns: 80px auto 110px;
+    }
+    .flex {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .vote {
+      width: auto;
+      justify-self:left;
+      height: 80%;
+      padding-block:0.5em;
+    }
+    .user {
+      align-self: flex-start;
+      width:55px;
+    }
+    .reply{
+      width: 57%;
+      margin-left: 23%;
+      margin-right: 20%;
+    }
+    .reply > .grid-container {
+      width:auto;
+      margin-left: 2rem;
+    }
+}
